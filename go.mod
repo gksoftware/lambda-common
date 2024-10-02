@@ -1,4 +1,4 @@
-module lambda-common
+module github.com/gksoftware/lambda-common
 
 go 1.23.1
 
