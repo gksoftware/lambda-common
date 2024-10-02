@@ -8,6 +8,12 @@ import (
 	"net/http"
 )
 
+const (
+	ErrorFailedToUnmarshal  = 100
+	ErrorFailedToMarshal    = 200
+	ErrorFailedToHashSecret = 300
+)
+
 type ApiError struct {
 	Id         int
 	StatusCode int
