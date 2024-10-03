@@ -9,9 +9,19 @@ import (
 )
 
 const (
-	ErrorFailedToUnmarshal  = 100
-	ErrorFailedToMarshal    = 200
-	ErrorFailedToHashSecret = 300
+	ErrorFailedToUnmarshal                    = 100
+	ErrorFailedToMarshal                      = 200
+	ErrorFailedToHashSecret                   = 300
+	ErrorCognitoResourceNotFoundException     = 400
+	ErrorCognitoInvalidParameterException     = 401
+	ErrorCognitoUserLambdaValidationException = 402
+	ErrorCognitoNotAuthorizedException        = 404
+	ErrorCognitoInvalidPasswordException      = 405
+	ErrorCognitoUsernameExistsException       = 406
+	ErrorCognitoTooManyRequestsException      = 407
+	ErrorCognitoLimitExceededException        = 408
+	ErrorCognitoForbiddenException            = 409
+	ErrorCognitoUnexpectedException           = 499
 )
 
 func (e ApiError) Error() string {
