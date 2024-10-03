@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func Test_Error(t *testing.T) {
+func Test_ApiError(t *testing.T) {
 	var err ApiError
 	err.Id = 100
 	err.StatusCode = 404
@@ -16,7 +16,7 @@ func Test_Error(t *testing.T) {
 	err.Body.Message = "testing"
 	err.Err = fmt.Errorf("Message: %s", "testing")
 
-	want := "Id: 100, StatusCode: 404, Error: Message: testing, Body: {\"Id\":100,\"StatusCode\":404,\"Message\":\"testing\"}"
+	want := "Id: 100, StatusCode: 404, Error: Message: testing, Body: {\"Id\":100,\"Message\":\"testing\",\"StatusCode\":404}"
 	got := err.Error()
 
 	if want != got {
@@ -24,13 +24,13 @@ func Test_Error(t *testing.T) {
 	}
 }
 
-func Test_Error_Without_Body(t *testing.T) {
+func Test_ApiError_Without_Body(t *testing.T) {
 	var err ApiError
 	err.Id = 100
 	err.StatusCode = 404
 	err.Err = fmt.Errorf("Message: %s", "testing")
 
-	want := "Id: 100, StatusCode: 404, Error: Message: testing, Body: {\"Id\":0,\"StatusCode\":0,\"Message\":\"\"}"
+	want := "Id: 100, StatusCode: 404, Error: Message: testing, Body: {\"Id\":0,\"Message\":\"\",\"StatusCode\":0}"
 	got := err.Error()
 
 	if want != got {
@@ -79,7 +79,7 @@ func Test_ResponseError_WithApiError(t *testing.T) {
 	err.Body.Message = "Test message"
 
 	var want events.APIGatewayProxyResponse
-	want.Body = "{\"Id\":200,\"StatusCode\":500,\"Message\":\"Test message\"}"
+	want.Body = "{\"Id\":200,\"Message\":\"Test message\",\"StatusCode\":500}"
 	want.StatusCode = 500
 
 	got, _ := CreateResponseError(err)
@@ -95,7 +95,7 @@ func Test_ResponseError_WithNonApiError(t *testing.T) {
 	err := fmt.Errorf("Message: %s", "test")
 
 	var want events.APIGatewayProxyResponse
-	want.Body = "{\"Id\":0,\"StatusCode\":500,\"Message\":\"Unknown server error\"}"
+	want.Body = "{\"Id\":0,\"Message\":\"Unknown server error\",\"StatusCode\":500}"
 	want.StatusCode = http.StatusInternalServerError
 
 	got, _ := CreateResponseError(err)

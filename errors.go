@@ -14,19 +14,6 @@ const (
 	ErrorFailedToHashSecret = 300
 )
 
-type ApiError struct {
-	Id         int
-	StatusCode int
-	Body       ApiErrorBody
-	Err        error
-}
-
-type ApiErrorBody struct {
-	Id         int
-	StatusCode int
-	Message    string
-}
-
 func (e ApiError) Error() string {
 	js, err := json.Marshal(e.Body)
 	if err != nil {
