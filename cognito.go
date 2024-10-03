@@ -28,7 +28,7 @@ func HandleCognitoError(err error) ApiError {
 	} else if strings.HasPrefix(e, "ForbiddenException") {
 		return CreateApiError(ErrorCognitoForbiddenException, http.StatusForbidden, "Forbidden", err)
 	} else {
-		fmt.Errorf("Error: %s", err.Error())
+		fmt.Println(err)
 		return CreateApiError(ErrorCognitoUnexpectedException, http.StatusInternalServerError, "Unexpected error", err)
 	}
 }
