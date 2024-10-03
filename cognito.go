@@ -1,6 +1,7 @@
 package lambda_common
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -27,6 +28,7 @@ func HandleCognitoError(err error) ApiError {
 	} else if strings.HasPrefix(e, "ForbiddenException") {
 		return CreateApiError(ErrorCognitoForbiddenException, http.StatusForbidden, "Forbidden", err)
 	} else {
+		fmt.Errorf("Error: %s", err.Error())
 		return CreateApiError(ErrorCognitoUnexpectedException, http.StatusInternalServerError, "Unexpected error", err)
 	}
 }
