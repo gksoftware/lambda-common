@@ -43,7 +43,7 @@ func Test_HandleCognitoError_WithUserLambdaValidationException(t *testing.T) {
 func Test_HandleCognitoError_WithNotAuthorizedException(t *testing.T) {
 	e := HandleCognitoError(fmt.Errorf("NotAuthorizedException"))
 	test_error_id(ErrorCognitoNotAuthorized, e.Id, t)
-	test_error_status_code(http.StatusForbidden, e.StatusCode, t)
+	test_error_status_code(http.StatusUnauthorized, e.StatusCode, t)
 }
 
 func Test_HandleCognitoError_WithInvalidPasswordException(t *testing.T) {

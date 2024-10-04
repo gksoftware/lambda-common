@@ -16,7 +16,7 @@ func HandleCognitoError(err error) ApiError {
 	} else if strings.HasPrefix(e, "UserLambdaValidation") {
 		return CreateApiError(ErrorCognitoUserLambdaValidation, http.StatusBadRequest, "Validation error", err)
 	} else if strings.HasPrefix(e, "NotAuthorized") {
-		return CreateApiError(ErrorCognitoNotAuthorized, http.StatusForbidden, "Not authorized", err)
+		return CreateApiError(ErrorCognitoNotAuthorized, http.StatusUnauthorized, "Not authorized", err)
 	} else if strings.HasPrefix(e, "InvalidPassword") {
 		return CreateApiError(ErrorCognitoInvalidPassword, http.StatusBadRequest, "Invalid password", err)
 	} else if strings.HasPrefix(e, "UsernameExists") {
