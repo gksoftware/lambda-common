@@ -82,6 +82,18 @@ func Test_HandleCognitoError_WithUserNotFoundException(t *testing.T) {
 	test_error_status_code(http.StatusUnauthorized, e.StatusCode, t)
 }
 
+func Test_HandleCognitoError_WithPasswordResetRequiredException(t *testing.T) {
+	e := HandleCognitoError(fmt.Errorf("PasswordResetRequired"))
+	test_error_id(ErrorCognitoPasswordResetRequired, e.Id, t)
+	test_error_status_code(http.StatusUnauthorized, e.StatusCode, t)
+}
+
+func Test_HandleCognitoError_WithUserNotConfirmedException(t *testing.T) {
+	e := HandleCognitoError(fmt.Errorf("UserNotConfirmed"))
+	test_error_id(ErrorCognitoUserNotConfirmed, e.Id, t)
+	test_error_status_code(http.StatusUnauthorized, e.StatusCode, t)
+}
+
 func Test_HandleCognitoError_WithUnexpectedException(t *testing.T) {
 	e := HandleCognitoError(fmt.Errorf("UnexpectedException"))
 	test_error_id(ErrorCognitoUnexpected, e.Id, t)

@@ -1,7 +1,7 @@
 package lambda_common
 
 import (
-	"fmt"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -29,8 +29,12 @@ func HandleCognitoError(err error) ApiError {
 		return CreateApiError(ErrorCognitoForbidden, http.StatusForbidden, "Forbidden", err)
 	} else if strings.HasPrefix(e, "UserNotFound") {
 		return CreateApiError(ErrorCognitoUnauthorized, http.StatusUnauthorized, "Unauthorized", err)
+	} else if strings.HasPrefix(e, "PasswordResetRequired") {
+		return CreateApiError(ErrorCognitoPasswordResetRequired, http.StatusUnauthorized, "Password reset required", err)
+	} else if strings.HasPrefix(e, "UserNotConfirmed") {
+		return CreateApiError(ErrorCognitoUserNotConfirmed, http.StatusUnauthorized, "User not confirmed", err)
 	} else {
-		fmt.Println(err)
+		log.Println(err)
 		return CreateApiError(ErrorCognitoUnexpected, http.StatusInternalServerError, "Unexpected error", err)
 	}
 

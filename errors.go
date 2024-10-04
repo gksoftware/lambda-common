@@ -9,20 +9,22 @@ import (
 )
 
 const (
-	ErrorFailedToUnmarshal           = 100
-	ErrorFailedToMarshal             = 200
-	ErrorFailedToHashSecret          = 300
-	ErrorCognitoResourceNotFound     = 400
-	ErrorCognitoInvalidParameter     = 401
-	ErrorCognitoUserLambdaValidation = 402
-	ErrorCognitoNotAuthorized        = 403
-	ErrorCognitoInvalidPassword      = 404
-	ErrorCognitoUsernameExists       = 405
-	ErrorCognitoTooManyRequests      = 406
-	ErrorCognitoLimitExceeded        = 407
-	ErrorCognitoForbidden            = 408
-	ErrorCognitoUnauthorized         = 409
-	ErrorCognitoUnexpected           = 499
+	ErrorFailedToUnmarshal            = 100
+	ErrorFailedToMarshal              = 200
+	ErrorFailedToHashSecret           = 300
+	ErrorCognitoResourceNotFound      = 400
+	ErrorCognitoInvalidParameter      = 401
+	ErrorCognitoUserLambdaValidation  = 402
+	ErrorCognitoNotAuthorized         = 403
+	ErrorCognitoInvalidPassword       = 404
+	ErrorCognitoUsernameExists        = 405
+	ErrorCognitoTooManyRequests       = 406
+	ErrorCognitoLimitExceeded         = 407
+	ErrorCognitoForbidden             = 408
+	ErrorCognitoUnauthorized          = 409
+	ErrorCognitoPasswordResetRequired = 410
+	ErrorCognitoUserNotConfirmed      = 411
+	ErrorCognitoUnexpected            = 499
 )
 
 func (e ApiError) Error() string {
