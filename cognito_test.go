@@ -76,6 +76,12 @@ func Test_HandleCognitoError_WithForbiddenException(t *testing.T) {
 	test_error_status_code(http.StatusForbidden, e.StatusCode, t)
 }
 
+func Test_HandleCognitoError_WithUserNotFoundException(t *testing.T) {
+	e := HandleCognitoError(fmt.Errorf("UserNotFoundException"))
+	test_error_id(ErrorCognitoUnauthorized, e.Id, t)
+	test_error_status_code(http.StatusUnauthorized, e.StatusCode, t)
+}
+
 func Test_HandleCognitoError_WithUnexpectedException(t *testing.T) {
 	e := HandleCognitoError(fmt.Errorf("UnexpectedException"))
 	test_error_id(ErrorCognitoUnexpected, e.Id, t)

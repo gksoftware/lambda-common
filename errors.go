@@ -21,6 +21,7 @@ const (
 	ErrorCognitoTooManyRequests      = 406
 	ErrorCognitoLimitExceeded        = 407
 	ErrorCognitoForbidden            = 408
+	ErrorCognitoUnauthorized         = 409
 	ErrorCognitoUnexpected           = 499
 )
 

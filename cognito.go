@@ -27,8 +27,11 @@ func HandleCognitoError(err error) ApiError {
 		return CreateApiError(ErrorCognitoLimitExceeded, http.StatusTooManyRequests, "Limit exceeded", err)
 	} else if strings.HasPrefix(e, "Forbidden") {
 		return CreateApiError(ErrorCognitoForbidden, http.StatusForbidden, "Forbidden", err)
+	} else if strings.HasPrefix(e, "UserNotFound") {
+		return CreateApiError(ErrorCognitoUnauthorized, http.StatusUnauthorized, "Unauthorized", err)
 	} else {
 		fmt.Println(err)
 		return CreateApiError(ErrorCognitoUnexpected, http.StatusInternalServerError, "Unexpected error", err)
 	}
+
 }
