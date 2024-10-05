@@ -9,7 +9,7 @@ import (
 func HandleCognitoError(err error) ApiError {
 	e := err.Error()
 
-	if strings.HasPrefix(e, "ResourceNotFound") {
+q	if strings.HasPrefix(e, "ResourceNotFound") {
 		return CreateApiError(ErrorCognitoResourceNotFound, http.StatusNotFound, "User registration resource not found", err)
 	} else if strings.HasPrefix(e, "InvalidParameter") {
 		return CreateApiError(ErrorCognitoInvalidParameter, http.StatusBadRequest, "Invalid parameters", err)
