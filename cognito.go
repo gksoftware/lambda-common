@@ -33,6 +33,8 @@ func HandleCognitoError(err error) ApiError {
 		return CreateApiError(ErrorCognitoPasswordResetRequired, http.StatusUnauthorized, "Password reset required", err)
 	} else if strings.HasPrefix(e, "UserNotConfirmed") {
 		return CreateApiError(ErrorCognitoUserNotConfirmed, http.StatusUnauthorized, "User not confirmed", err)
+	} else if strings.HasPrefix(e, "CodeMismatch") {
+		return CreateApiError(ErrorCognitoCodeMismatch, http.StatusUnauthorized, "Verification code did not match", err)
 	} else {
 		log.Println(err)
 		return CreateApiError(ErrorCognitoUnexpected, http.StatusInternalServerError, "Unexpected error", err)

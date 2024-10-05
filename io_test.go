@@ -2,6 +2,7 @@ package lambda_common
 
 import (
 	"github.com/aws/aws-lambda-go/events"
+	"strings"
 	"testing"
 )
 
@@ -54,6 +55,62 @@ func Test_MarshalResponse(t *testing.T) {
 
 	if want != got {
 		t.Fatalf("Wanted %s, but got %s", want, got)
+	}
+}
+
+func Test_ExtractCooikes_WithMultipleCookies(t *testing.T) {
+	cookieString := "access_token=eyJr; id_token=HkiO; refresh_token=NNIiwiYWxnIjoi"
+
+	cookies := *ExtractCookies(cookieString)
+
+	if len(cookies) != 3 {
+		t.Fatalf("Wanted %d cookies, but got %d", 3, len(cookies))
+	}
+
+	access_token := cookies["access_token"]
+	if len(strings.TrimSpace(access_token)) == 0 {
+		t.Fatalf("Wanted access_token, but got nil")
+	}
+
+	if access_token != "eyJr" {
+		t.Fatalf("Wanted access_token=eyJr, but got %s", access_token)
+	}
+
+	refresh_token := cookies["refresh_token"]
+	if len(strings.TrimSpace(refresh_token)) == 0 {
+		t.Fatalf("Wanted refresh_token, but got nil")
+	}
+
+	if refresh_token != "NNIiwiYWxnIjoi" {
+		t.Fatalf("Wanted access_token=NNIiwiYWxnIjoi, but got %s", refresh_token)
+	}
+
+	id_token := cookies["id_token"]
+	if len(strings.TrimSpace(id_token)) == 0 {
+		t.Fatalf("Wanted id_token, but got nil")
+	}
+
+	if id_token != "HkiO" {
+		t.Fatalf("Wanted id_token=HkiO, but got %s", id_token)
+	}
+}
+
+func Test_ExtractCooikes_WithSingleCookie(t *testing.T) {
+	cookieString := "access_token=eyJr;"
+
+	cookies := *ExtractCookies(cookieString)
+
+	if len(cookies) != 1 {
+		t.Fatalf("Wanted %d cookies, but got %d", 3, len(cookies))
+	}
+
+	access_token := cookies["access_token"]
+	if len(strings.TrimSpace(access_token)) == 0 {
+		t.Fatalf("Wanted access_token, but got nil")
+	}
+
+	if access_token != "eyJr" {
+		t.Fatalf("Wanted access_token=eyJr, but got %s", access_token)
 	}
 
 }

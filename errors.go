@@ -24,6 +24,7 @@ const (
 	ErrorCognitoUnauthorized          = 409
 	ErrorCognitoPasswordResetRequired = 410
 	ErrorCognitoUserNotConfirmed      = 411
+	ErrorCognitoCodeMismatch          = 412
 	ErrorCognitoUnexpected            = 499
 )
 
